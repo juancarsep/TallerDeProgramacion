@@ -2,7 +2,34 @@ const fs = require('fs');
 
 console.log("-----------> Inicio del programa");
 
-function readWriteFsASync() {
+
+//
+//                  FUNCIONES WRAPPER FILE SYSTEM
+//
+
+function readFilePromise() {
+    return new Promise((resolve, reject) => {
+        s.readFile('./textoo.txt', 'utf-8', (error, data) => {
+            if (error) reject(error)
+            else resolve(data)
+        })
+    })
+}
+
+function writeFilePromise(file, datos) {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(file, datos, error => {
+            if (error) reject(error)
+            else resolve()
+        })
+    })
+}
+
+
+
+
+
+async function readWriteFsASync() {
 
     try {
 
@@ -11,41 +38,17 @@ function readWriteFsASync() {
 
 
         //Leer archivo de forma sincronica
-        fs.readFile('./textoo.txt', 'utf-8', (error, data) => {
-            if (error) {
-                console.log(`Error al leer el archivo: ${error.message} `)
-            } else {
-                console.log(`lectura OK rd ANTES: ${data}`)
-            }
+        let datos = await readFilePromise('./textoo.txt')
+        console.log('rd antes', datos);
 
 
-            //Escribir archivo de forma sincronica
-            fs.writeFile('./textoo.txt', new Date().toLocaleString(), error => {
-                if (error) throw Error(`Error en escritura asincronica: ${error.message}`)
-                console.log('Write OK');
+        await writeFilePromise('./textoo.txt', new Date().toLocaleString())
 
+        datos = await readFilePromise('./textoo.txt')
+        console.log('rd despues', datos)
 
-                //Volver a mostrar el archivo
-                fs.readFile('./textoo.txt', 'utf-8', (error, data) => {
-                    if (error) {
-                        console.log(`Error al leer el archivo: ${error.message} `)
-                    } else {
-                        console.log(`lectura OK rd DESPUES: ${data}`)
-                    }
-                });
-            });
-        });
-
-
-
-
-
-
-
-
-
-
-    } catch (error) {
+    }
+    catch (error) {
         console.log("Error al leer/escribir archivo: ");
     }
 
