@@ -31,23 +31,67 @@ app.get('/productos/:id?', (req, res) => {
     if (id) {
         const producto = productos.find(producto => producto.id = id)
         res.json(producto || {}) // ---> SHORT CIRCUIT OPERATOR
-    }else{
+    } else {
         res.json(productos)
     }
 
-//esta modificacion permite que si no se pasa id, no da error y devuelve todos los registros, si se pasa id devuelv el registro
-//con la id solicitada o devulve vacio
+    //esta modificacion permite que si no se pasa id, no da error y devuelve todos los registros, si se pasa id devuelv el registro
+    //con la id solicitada o devulve vacio
 
 
 })
+
+
+
+
 //POST ENDPOINT
 app.post('/productos', (req, res) => {
+    const producto = req.bodyconsole.log(producto)
+    productos.push(producto);
+    //le agregamos el id ya que no lo pasamos desde la solicitud
+    producto.id = productos[productos.length - 1]?.id + 1 || 0;
+    // optional chaning es agregar un signo de pregunta, si no esta definido, devuelve un indefinido
+    // y si si esta definido, devuelve lo que tiene que devolver
+
+    res.json(producto);
 })
+
+
+
+
 //PUT ENDPOINT
-app.put('/productos', (req, res) => {
+app.put('/productos/:id', (req, res) => {
+    const { id } = req.params;
+    const producto = req.body;
+
+    const index = productos.findIndex(producto => producto.id === id);
+    if (index != -1) {
+        //Lo que permite esto es que solo sea una actualizacion parcial del registro
+        const prodcutoAnt = productos[index];
+        const productoAct = {...prodcutoAnt, ...producto}
+        productos.splice(index, 1, productoAct);
+        res.json(productoAct);
+    } else {
+        res.json({});
+    }    
 })
+
+
+
+
+
 //DELETE ENDPOINT
-app.delete('/productos', (req, res) => {
+app.delete('/productos/:id', (req, res) => {
+    const { id } = req.params;
+    const producto = req.body;
+
+    const index = productos.findIndex(producto => producto.id === id);
+    if (index != -1) {        
+        productos.splice(index, 1, producto);
+    }
+
+    res.json(producto);
+
 })
 
 
