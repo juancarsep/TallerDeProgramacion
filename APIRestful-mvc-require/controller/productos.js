@@ -12,7 +12,8 @@ const obtenerProductos = (req, res) => {
 
 }
 const guardarProductos = (req, res) => {
-    const producto = req.bodyconsole.log(producto)
+    const producto = req.body
+    console.log(producto)
     const productoGuardado = producto.guardarProductos(producto)
     res.json(productoGuardado);
     
