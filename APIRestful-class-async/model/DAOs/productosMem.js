@@ -11,14 +11,14 @@ class ModelMem {
             { id: 6, nombre: "Joystick", precio: 1223.43, stock: 55 },
         ]
     }
-    obtenerProductos = () => productos
-    obtenerProducto = id => {
+    obtenerProductos = async() => productos
+    obtenerProducto = async id => {
         const producto = this.#productos.find(p => p.id === id)
         return producto || {}
     }
-    guardarProductos = () => { }
-    actualizarProductos = () => { }
-    borrarProductos = () => { }
+    guardarProductos = async () => { }
+    actualizarProductos = async () => { }
+    borrarProductos = async () => { }
 }
 
 
