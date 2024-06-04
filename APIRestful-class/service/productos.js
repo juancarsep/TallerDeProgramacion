@@ -1,8 +1,11 @@
-import ModelFile from '../model/productosFile.js'
+//import ModelFile from '../model/productosFile.js'
+import ModelFactory from '../model/DAOs/productosFactory.js'
+import config from '../config.js'
 
 class Servicio {
-
-    modelo = new ModelFile();
+    modelo = null
+    //modelo = new ModelFile();
+    modelo = new ModelFactory(config.MODO_PERSISTENCIA)
 
     obtenerProductos = id => {
         if (id) {
