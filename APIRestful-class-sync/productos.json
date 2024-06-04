@@ -1,0 +1,20 @@
+[
+	{
+		"id": "1",
+		"nombre": "Memoria",
+		"precio": 56.78,
+		"stock": 11
+	},
+	{
+		"id": "2",
+		"nombre": "LG L4 TV",
+		"precio": 2700.99,
+		"stock": 11
+	},
+	{
+		"id": "3",
+		"nombre": "Moto G20 SE",
+		"precio": 2700.99,
+		"stock": 11
+	}
+]

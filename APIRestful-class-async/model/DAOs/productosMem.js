@@ -32,10 +32,4 @@ class ModelMem {
 
 
 
-export default {
-    obtenerProductos,
-    obtenerProducto,
-    guardarProductos,
-    actualizarProductos,
-    borrarProductos
-}
+export default ModelMem
